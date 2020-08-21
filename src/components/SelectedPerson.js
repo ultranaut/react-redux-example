@@ -1,9 +1,28 @@
-import React, { Component } from 'react';
+import React from 'react';
+import { connect } from 'react-redux';
 
-class SelectedPerson extends Component {
-  render() {
-    return <div>SelectedPerson</div>;
+const SelectedPerson = ({ person }) => {
+  if (!person) {
+    return <h3>Select a person</h3>;
   }
-}
+  return (
+    <div>
+      <h3>Details:</h3>
+      <p>
+        First: {person.first}
+        <br />
+        Last: {person.last}
+        <br />
+        Occupation: {person.occupation}
+      </p>
+    </div>
+  );
+};
 
-export default SelectedPerson;
+const mapStateToProps = (state) => {
+  return {
+    person: state.selectedPerson,
+  };
+};
+
+export default connect(mapStateToProps)(SelectedPerson);
